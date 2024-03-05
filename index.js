@@ -10,6 +10,9 @@ app.get("/home", (req, res) => {
 app.get("/fail", (req, res) => {
   res.status(404).send("fail route");
 });
+app.get("/post/:id", (req, res) => {
+  res.send(`取得了${req.params.id}`);
+});
 
 //監聽port號
 app.listen(3000, function () {
