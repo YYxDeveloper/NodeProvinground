@@ -30,3 +30,20 @@ app.get("/todos", (req, res) => {
     }
   });
 });
+
+app.get("/todos1/:id", (req, res) => {
+  fs.readFile("test.json", "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("fail1");
+    }
+
+    const db = JSON.parse(data);
+    console.log(db);
+    let todo = db.todos.find((item) => item.id === Number(req.params.id));
+    if (!todo) {
+      return res.status(404).send("fail2");
+    }
+
+    return res.status(200).json(todo);
+  });
+});
