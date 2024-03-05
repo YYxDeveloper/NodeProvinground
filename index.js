@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 //導入express
 const express = require("express");
 //創建一個實例
@@ -17,4 +19,14 @@ app.get("/post/:id", (req, res) => {
 //監聽port號
 app.listen(3000, function () {
   console.log("服務已啟動");
+});
+
+app.get("/todos", (req, res) => {
+  fs.readFile("test.json", "utf8", (err, data) => {
+    if (err) {
+      res.status(500).send("fail");
+    } else {
+      res.send(data);
+    }
+  });
 });
