@@ -1,5 +1,11 @@
 const fs = require("fs");
+const { getDB } = require("./node_promissify");
+const promisify = require("util").promisify;
 
+const path = require("path");
+const readFile = promisify(fs.readFile);
+
+const dbPath = path.join(__dirname, "test.json");
 //導入express
 const express = require("express");
 //創建一個實例
@@ -46,4 +52,12 @@ app.get("/todos1/:id", (req, res) => {
 
     return res.status(200).json(todo);
   });
+});
+app.get("/node_promissify", async (req, res) => {
+  try {
+    const db = await getDB();
+    res.send(db);
+  } catch (err) {
+    res.status(500).send("fail");
+  }
 });
