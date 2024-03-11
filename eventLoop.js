@@ -15,7 +15,7 @@ new Promise(function (resolve, reject) {
   console.log("promise then");
 });
 
-(async function () {
+(function () {
   console.log("async");
 })();
 
